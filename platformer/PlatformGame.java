@@ -15,6 +15,7 @@ public class PlatformGame {
 		
 		while (true) {
 			Window.out.background("light blue");
+			Window.out.rectangle(250, 475, 500, 50);
 			
 			me.draw();
 			me.move();
@@ -26,13 +27,16 @@ public class PlatformGame {
 			for (Platform p : platforms) {
 				p.draw();
 				
-				// Calculate the distance and store if closest.
-				int dx = p.x - me.x;
-				int dy = p.y - me.y;
-				double distance = Math.sqrt(dx * dx + dy * dy );
-				if (distance < minDistance) {
-					minDistance = distance;
-					closest = p;
+				// Only if this platform is below me.
+				if (p.y > me.y) {
+					// Calculate the distance and store if closest.
+					int dx = p.x - me.x;
+					int dy = p.y - me.y;
+					double distance = Math.sqrt(dx * dx + dy * dy );
+					if (distance < minDistance) {
+						minDistance = distance;
+						closest = p;
+					}
 				}
 			}
 			me.setClosestPlatform(closest);
