@@ -10,8 +10,9 @@ public class World extends JFrame {
 
 	// Run the world
 	public static void main(String[] args) {
-		World w = new World();
-		
+		World world = new World();
+		world.setDesiredPath(world.getCell(20, 50), world.getCell(80, 50));
+		world.repaint();
 	}
 
 
@@ -57,7 +58,7 @@ public class World extends JFrame {
 	public void setWall(int x, int y) {
 		grid[x][y].type = WALL;
 	}
-
+	
 	public Cell getCell(int x, int y) {
 		return grid[x][y];
 	}
