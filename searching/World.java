@@ -58,6 +58,10 @@ public class World extends JFrame {
 		grid[x][y].type = WALL;
 	}
 
+	public Cell getCell(int x, int y) {
+		return grid[x][y];
+	}
+
 	public Cell getStart() {
 		return start;
 	}
