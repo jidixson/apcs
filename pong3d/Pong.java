@@ -19,10 +19,13 @@ public class Pong {
 	static long newoy = 300;
 	static boolean updating = false;
 	
+	static String player = "p1";
+	static String opponent = "p2";
+	
 	public static void main(String[] args) {
 		Firebase server = new Firebase("https://javagame.firebaseio.com"); 
 		
-		server.child("p2x").addValueEventListener(new ValueEventListener() {
+		server.child(opponent + "x").addValueEventListener(new ValueEventListener() {
 			public void onCancelled(FirebaseError error) {}
 
 			@Override
@@ -35,7 +38,7 @@ public class Pong {
 			}
 		});
 		
-		server.child("p2y").addValueEventListener(new ValueEventListener() {
+		server.child(opponent + "y").addValueEventListener(new ValueEventListener() {
 			public void onCancelled(FirebaseError error) {}
 
 			@Override
@@ -73,8 +76,8 @@ public class Pong {
 			x = Window.mouse.getX() - 400;
 			y = Window.mouse.getY() - 300;
 			
-			server.child("p1x").setValue(x);
-			server.child("p1y").setValue(y);
+			server.child(player + "x").setValue(x);
+			server.child(player + "y").setValue(y);
 			
 			bx += dx;
 			by += dy;
