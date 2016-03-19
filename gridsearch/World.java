@@ -85,6 +85,7 @@ public class World {
 			e.printStackTrace();
 		}
 		if (input.length() > 0) {
+			this.scale = scale;
 			width = input.length() / height - 1;
 			grid = new Cell[width][height];
 			Window.size(width * scale, height * scale);
