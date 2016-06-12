@@ -1,3 +1,5 @@
+package platformer;
+
 import java.util.ArrayList;
 
 import apcs.Window;
@@ -5,43 +7,46 @@ import apcs.Window;
 public class PlatformGame {
 
 	public static void main(String[] args) {
+		Window.size(400, 600);
 		
-		Player me = new Player();
+		// Set up all the variables/data
+		// One jumper
+		Jumper jumper = new Jumper();
+		// Many platforms
+		ArrayList<Platform> platformList = new ArrayList<Platform>();
 		
-		ArrayList <Platform> platforms = new ArrayList <Platform> ();
+		// Timer variable
+		int timer = 1;
 		
-		platforms.add(new Platform(200, 300, 50));
-		platforms.add(new Platform(250, 450, 500));
-		
+		// Infinitely draw frames
 		while (true) {
+			Window.frame();
 			Window.out.background("light blue");
-			Window.out.rectangle(250, 475, 500, 50);
 			
-			me.draw();
-			me.move();
+			Window.out.color("green");
+			Window.out.rectangle(Window.width() / 2, Window.height(), Window.width(), 60);
 			
-			// For nearest neighbor calculation
-			double minDistance = 5000;
-			Platform closest = null;
+			// Tell the one jumper to draw and move
+			jumper.draw();
+			jumper.move();
 			
-			for (Platform p : platforms) {
-				p.draw();
+			// Tell every platform to draw and move
+			for (Platform platform : platformList) {
+				platform.draw();
+				platform.move();
 				
-				// Only if this platform is below me.
-				if (p.y > me.y) {
-					// Calculate the distance and store if closest.
-					int dx = p.x - me.x;
-					int dy = p.y - me.y;
-					double distance = Math.sqrt(dx * dx + dy * dy );
-					if (distance < minDistance) {
-						minDistance = distance;
-						closest = p;
-					}
+				// Check if the player should be on this platform
+				if (jumper.isOn(platform)) {
+					jumper.jumpTo(platform);
 				}
 			}
-			me.setClosestPlatform(closest);
 			
-			Window.frame();
+			// Timer to add platforms
+			timer = timer - 1;
+			if (timer == 0) {
+				timer = 30;
+				platformList.add(new Platform());
+			}
 		}
 	}
 
