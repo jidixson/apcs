@@ -237,5 +237,6 @@ public class World {
 				Window.out.square(x * scale + scale / 2, y * scale + scale / 2, scale - (showGrid ? 1 : 0));
 			}
 		}
+		Window.frame();
 	}
 }
