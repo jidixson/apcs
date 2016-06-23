@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
-import apcs.Slider;
 import apcs.Window;
 
 public class Sudoku {
@@ -16,8 +15,7 @@ public class Sudoku {
 
 	public static void main(String[] args) {
 		Window.size(SIZE, SIZE);
-		Slider s = new Slider("speed", 0, 10);
-		s.setValue(0);
+		int speed = 1;
 		int level = 4;
 		
 		ArrayList <Integer[][]> boards = getBoards(level);
@@ -26,7 +24,7 @@ public class Sudoku {
 			Integer[][] board = boards.get(i);
 			long start = System.currentTimeMillis();
 			draw(board);
-			solve(board, s.getValue());
+			solve(board, speed);
 			System.out.println("Done in " + (System.currentTimeMillis() - start) + " ms.");
 			
 			Window.sleep(1000);
@@ -234,7 +232,7 @@ public class Sudoku {
 		ArrayList <Integer[][]> boards = new ArrayList <Integer[][]> ();
 		
 		try {
-			Scanner s = new Scanner(new File("sudoku/" + level + ".txt"));
+			Scanner s = new Scanner(new File("sudoku/level" + level + ".txt"));
 			
 			while (s.hasNextLine()) {
 				Integer[][] board = new Integer[9][9];
