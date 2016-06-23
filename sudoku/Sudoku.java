@@ -232,7 +232,7 @@ public class Sudoku {
 		ArrayList <Integer[][]> boards = new ArrayList <Integer[][]> ();
 		
 		try {
-			Scanner s = new Scanner(new File("sudoku/level" + level + ".txt"));
+			Scanner s = new Scanner(new File("level" + level + ".txt"));
 			
 			while (s.hasNextLine()) {
 				Integer[][] board = new Integer[9][9];
